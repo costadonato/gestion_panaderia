@@ -1,0 +1,42 @@
+{% extends "base/base.html" %}
+{% block titulo %}Detalle de Proveedor{% endblock %}
+{% block contenido_principal %}
+<div class="container-fluid text-center rounded cabecera mt-5">
+    <header id="home">
+        <h1>Ventas</h1>
+        <h2>Detalle de proveedor #{{ proveedor.id }}</h2>
+    </header>
+</div>
+
+<div class="container-fluid mt-5">
+    <div class="container-fluid mt-4" style="background-color: darkred;">
+        <p><strong>Nombre: </strong> {{ proveedor.nombre }}</p>
+        <p><strong>Telefono: </strong> {{ proveedor.telefono }}</p>
+        <p><strong>Email: </strong> {{ proveedor.email }}</p>
+        <p><strong>Domicilo: </strong> {{ proveedor.domicilioCalle }} {{ proveedor.domicilioNum }}</p>
+        <p><strong>Localidad: </strong> {{ proveedor.domicilioLocalidad }}</p>
+        <p><strong>Departamento: </strong> {{ proveedor.domicilioDepartamento }}</p>
+        <p><strong>Razon social: </strong> {{ proveedor.razonSocial }}</p>
+    </div>
+
+    <h2>Materias Primas suministradas</h2>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Cantidad Disponible [Kg]</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mat_prima in mat_primas_suministradas %}
+                <tr>
+                    <td>{{ mat_prima.nombre}}</td>
+                    <td>{{ mat_prima.cant_disponible}}</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'proveedor:lista_proveedor' %}" class="btn btn-secondary mt-3">Volver al Listado</a>
+</div>
+{%endblock%}

@@ -1,0 +1,72 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block titulo %}Panadería El Maná: Informes{% endblock %}
+{% block contenido_principal %}
+    <div class="container-fluid contenedor-cuerpo">
+        <div class="container-fluid text-center rounded cabecera">
+            <header>
+                <h1>INFORMES</h1>
+                <h2>Encuentra toda la información sobre la panadería</h2>
+            </header>
+        </div>
+
+        <div class="container-fluid mt-3 mb-3">
+
+            <div class="row row-cols-1 row-cols-md-4 g-5">
+                <div class="col">
+                    <div class="card h-100 text-center">
+                        <img src="{% static 'img/buenasventas.png' %}" class="card-img-top" alt="Listado de ventas">
+                        <div class="card-body">
+                            <h5 class="card-title">Ventas</h5>
+                            <p class="card-text">Explora todas las ventas realizadas por la panadería, con diferentes filtros para una mejor búsqueda.</p>
+                            <a href="{% url 'producto:lista_productos' %}" class="btn btn-success">ACCEDER</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 text-center">
+                        <img src="{% static 'img/prodvendido.jpg' %}" class="card-img-top" alt="Listado de productos más vendidos">
+                        <div class="card-body">
+                            <h5 class="card-title">Productos más vendidos</h5>
+                            <p class="card-text">Los productos más vendidos por la panadería en diferentes periodos de tiempo.</p>
+                            <a href="{% url 'pedido:lista_pedidos' %}" class="btn btn-success">ACCEDER</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 text-center">
+                        <img src="{% static 'img/vendedorpremiado.png' %}" class="card-img-top" alt="Listado de vendedores con más ventas">
+                        <div class="card-body">
+                            <h5 class="card-title">Vendedores con más ventas</h5>
+                            <p class="card-text">Información sobre los vendedores con mejor rendimiento en cuanto a ventas. </p>
+                            <a href="{% url 'proveedor:lista_proveedor' %}" class="btn btn-success">ACCEDER</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 text-center">
+                        <img src="{% static 'img/productofaltante.png' %}" class="card-img-top" alt="Listado de materia prima faltante">
+                        <div class="card-body">
+                            <h5 class="card-title">Materia prima faltante</h5>
+                            <p class="card-text">Listado sobre materia prima en escasez, se necesita pedir más a los proveedores!</p>
+                            <a href="{% url 'proveedor:lista_proveedor' %}" class="btn btn-success">ACCEDER</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 text-center">
+                        <img src="{% static 'img/productofaltante2.jpg' %}" class="card-img-top" alt="Listado de productos faltantes">
+                        <div class="card-body">
+                            <h5 class="card-title">Productos faltantes</h5>
+                            <p class="card-text">Listado sobre los productos en escasez, se necesita producir más!</p>
+                            <a href="{% url 'proveedor:lista_proveedor' %}" class="btn btn-success">ACCEDER</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

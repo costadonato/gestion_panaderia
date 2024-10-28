@@ -1,0 +1,58 @@
+{% extends "base/base.html" %}
+{% load static%}
+{% block titulo %}Clientes Mayoristas{% endblock %}
+{% block contenido_principal %}
+    <div class="container-fluid text-center rounded cabecera mt-5">
+        <header id="home">
+            <h1>Clientes Mayoristas</h1>
+        </header>
+    </div>
+    <div class="container-fluid mt-3 mb-3">
+        <a href="{% url 'cliente_mayorista:nuevo_clientemayorista' %}" class="btn btn-primary">
+            REGISTRAR CLIENTE
+        </a>
+        <br>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cuit</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Detalle</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes_mayoristas %}
+                    <tr>
+                        <td>{{ cliente.nombre_completo }}</td>
+                        <td>{{ cliente.cuit }}</td>
+                        <td>{{ cliente.telefono }}</td>
+                        <td>{{ cliente.email }}</td>
+                        <td><a href="{% url 'cliente_mayorista:detalle_cliente_mayorista' cliente.id%}" class="btn btn-primary">
+                                    DETALLE
+                        </a></td>
+                        <td><a href="{% url 'cliente_mayorista:editar_clientemayorista' cliente.id%}" class="btn btn-secondary">
+                                    EDITAR
+                        </a></td>
+                        <td>
+                            <form action="{% url 'cliente_mayorista:eliminar_clientemayorista' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="id_clientemayorista" value="{{ cliente.id }}">
+                                <input type="submit" value="ELIMINAR" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el ClienteMayorista?');">
+                            </form>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">No hay Clientes Mayoristas disponibles</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

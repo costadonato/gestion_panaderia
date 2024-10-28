@@ -1,0 +1,54 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block titulo %}Proveedores{% endblock %}
+{% block contenido_principal %}
+<div class="container-fluid mt-5">
+    <div class="container-fluid text-center rounded cabecera mt-5">
+        <header id="home">
+            <h1>Proveedores</h1>
+            <h2>Listado de proveedores</h2>
+        </header>
+    </div>
+
+    <div class="container-fluid mt-3 mb-3">
+        <a href="{% url 'proveedor:nuevo_proveedor' %}" class="btn btn-primary">
+            AGREGAR
+        </a>
+        <p></p>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th>Detalles</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prov in proveedor %}
+                <tr>
+                    <td>{{ prov.nombre }}</td>
+                    <td>{{ prov.telefono }}</td>
+                    <td>{{ prov.email}}</td>
+                    <td><a href="{% url 'proveedor:detalle_proveedor' prov.id %}" class="btn btn-primary">VER DETALLES</a></td>
+                    <td><a href="{% url 'proveedor:editar_proveedor' prov.id %}" class="btn btn-primary">EDITAR</a></td>
+                    <td>
+                        <form action="{% url 'proveedor:eliminar_proveedor' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="id_proveedor" value="{{ prov.id }}">
+                            <input type="submit" value="ELIMINAR" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar este proveedor?');">
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No hay proveedores disponibles</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base/base.html" %}
+{% block titulo %}Listado de Ventas{% endblock %}
+{% block contenido_principal %}
+<div class="container-fluid mt-5">
+    <div class="container-fluid text-center rounded cabecera mt-5">
+        <header id="home">
+            <h1>Ventas</h1>
+            <h2>Listado de ventas</h2>
+        </header>
+    </div>
+    <a href="{% url 'venta:nueva_venta' %}" class="btn btn-primary">
+        Nueva venta
+    </a>
+
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>FECHA</th>
+                <th>TIPO DE CLIENTE</th>
+                <th>TIPO DE VENTA</th>
+                <th>MONTO TOTAL</th>
+                <th>EMPLEADO</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venta in ventas %}
+                <tr>
+                    <td>{{ venta.fecha_venta|date:"d-m-Y h:i" }}</td>
+                    <td>{{ venta.tipo_cliente }}</td>
+                    <td>{{ venta.tipo_venta }}</td>
+                    <td>{{ venta.monto_total }}</td>
+                    <td>{{ venta.empleado.nombre_completo }}</td>
+                    <td>
+                        <a href="{% url 'venta:detalle_venta' venta.id %}" class="btn btn-info">Ver Detalle</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

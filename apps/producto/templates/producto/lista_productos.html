@@ -1,0 +1,80 @@
+{% extends "base/base.html" %}
+{% load static%}
+{% block titulo %}Productos{% endblock %}
+{% block contenido_principal %}
+    <div class="container-fluid text-center rounded cabecera mt-5">
+        <header id="home">
+            <h1>Productos</h1>
+        </header>
+    </div>
+    <div class="container-fluid mt-3 mb-3">
+        <a href="{% url 'producto:nuevo_producto' %}" class="btn btn-primary">
+            AGREGAR
+        </a>
+        <br>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Unidad Medida</th>
+                    <th>Tipo</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                    {% if producto.cantidad < producto.cantidadMinima %}
+                        <tr class="table-danger">
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.descripcion }}</td>
+                            <td>{{ producto.precio }}</td>
+                            <td>{{ producto.cantidad }}</td>
+                            <td>{{ producto.unidadMedida }}</td>
+                            <td>{{ producto.tipo }}</td>
+                            <td><a href="{% url 'producto:editar_producto' producto.id%}" class="btn btn-primary">
+                                        EDITAR
+                            </a></td>
+                            <td>
+                                <form action="{% url 'producto:eliminar_producto' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id_producto" value="{{ producto.id }}">
+                                    <input type="submit" value="ELIMINAR" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el Producto?');">
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.descripcion }}</td>
+                            <td>{{ producto.precio }}</td>
+                            <td>{{ producto.cantidad }}</td>
+                            <td>{{ producto.unidadMedida }}</td>
+                            <td>{{ producto.tipo }}</td>
+                            <td><a href="{% url 'producto:editar_producto' producto.id%}" class="btn btn-primary">
+                                        EDITAR
+                            </a></td>
+                            <td>
+                                <form action="{% url 'producto:eliminar_producto' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id_producto" value="{{ producto.id }}">
+                                    <input type="submit" value="ELIMINAR" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el Producto?');">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">No hay productos disponibles</td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

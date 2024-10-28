@@ -1,0 +1,42 @@
+{% extends "base/base.html" %}
+{% block titulo %}Detalle de Pedido{% endblock %}
+{% block contenido_principal %}
+<div class="container-fluid text-center rounded cabecera mt-5">
+    <header id="home">
+        <h1>Pedidos</h1>
+        <h2>Detalle de pedido #{{ pedido.id }}</h2>
+    </header>
+</div>
+
+<div class="container-fluid mt-5">
+    <div class="container-fluid mt-4" style="background-color: darkred; color:#ffeae4;">
+        <p><strong>Fecha de Registro:</strong> {{ pedido.fecha_emision|date:"d-m-Y "}}</p>
+        <p><strong>Proveedor:</strong> {{ pedido.proveedor.nombre }}</p>
+        <p><strong>Monto Total:</strong> {{ pedido.monto_total }}</p>
+        <p><strong>Observaciones:</strong> {{ pedido.observaciones }}</p>
+    </div>
+
+    <h2>Items</h2>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Insumo</th>
+                <th>Cantidad</th>
+                <th>Precio por Kg</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.materia_prima.nombre }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>{{ item.precio_unid }}</td>
+                    <td>{{ item.precio_total }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'pedido:lista_pedidos' %}" class="btn btn-secondary mt-3">Volver al Listado</a>
+</div>
+{%endblock%}

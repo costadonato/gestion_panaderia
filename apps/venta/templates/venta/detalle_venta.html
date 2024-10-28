@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+{% block titulo %}Detalle de Venta{% endblock %}
+{% block contenido_principal %}
+<div class="container-fluid text-center rounded cabecera mt-5">
+    <header id="home">
+        <h1>Ventas</h1>
+        <h2>Detalle de Venta #{{ venta.id }}</h2>
+    </header>
+</div>
+
+<div class="container-fluid mt-5">
+    <div class="container-fluid mt-4" style="background-color: darkred;">
+        <p><strong>Fecha de Registro:</strong> {{ venta.fecha_venta|date:"d-m-Y h:i"}}</p>
+        <p id="tipo_cliente"><strong>Tipo Cliente:</strong> {{ venta.tipo_cliente }}</p>
+        {% if venta.tipo_cliente == "Mayorista" %}
+            <p id="cliente_mayorista"><strong>Cliente Mayorista:</strong> {{ venta.cliente_mayorista.nombre_completo }}</p>
+        {% endif %}
+        <p><strong>Tipo de Venta:</strong> {{ venta.tipo_venta }}</p>
+        <p><strong>Forma de Pago:</strong> {{ venta.forma_pago }}</p>
+        <p><strong>Monto Total:</strong> {{ venta.monto_total }}</p>
+        <p><strong>Empleado:</strong> {{ venta.empleado.nombre_completo }}</p>
+        <p><strong>Observaciones:</strong> {{ venta.observaciones }}</p>
+
+    </div>
+
+    <h2>Items</h2>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Unidad de medida</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.producto.nombre }}</td>
+                    <td>{{ item.producto.unidadMedida }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>{{ item.precio_item }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'venta:lista_ventas' %}" class="btn btn-secondary mt-3">Volver al Listado</a>
+</div>
+{%endblock%}

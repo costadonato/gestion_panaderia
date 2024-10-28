@@ -1,0 +1,95 @@
+{% extends "base/base.html" %}
+{% load static%}
+{% block titulo %}Registrar venta{% endblock %}
+{% block contenido_principal %}
+    <div class="container-fluid text-center rounded cabecera mt-5">
+        <header id="home">
+            <h1>Ventas</h1>
+            <h2>Registrar</h2>
+        </header>
+    </div>
+
+    <div class="container-fluid mt-3 mb-3">
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- FORMULARIO DE LA VENTA-->
+            <fieldset class="rounded border formulario">
+                <h4>Información de la venta</h4>
+                <div class="row g-3">
+                    {% for field in form %}
+                        <div class="campo">
+                            {{ field.errors }}
+                            {{ field.label_tag }} {{ field }}
+                        </div><br>
+                    {% endfor %}
+                    {% csrf_token %} <!--cuestion de token de seguridad-->
+                </div>
+
+            </fieldset>
+
+            <fieldset class="rounded border formulario">
+                <h4>Item</h4>
+                {{ formset.management_form }}
+                <div id="formset-container">
+                    {% for form in formset %}
+                    <div class="item-form mb-3 p-3 border rounded">
+                        {{ form.as_p }}
+                        <p></p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="button" class="btn btn-secondary" id="add-form" >Agregar Item</button><!--onclick="addInput()-->
+
+            </fieldset>
+
+
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">REGISTRAR</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/script_venta.js' %}"></script>
+{% endblock %}
+
+
+    /*FORMA DEL VIDEO DE YOUTUBE
+    function addInput(){
+        var forms = document.querySelector('#id_items_venta-TOTAL_FORMS');
+
+        //Actualización de for para label producto
+        newLabelProducto = document.querySelector('label[for="id_items_venta-0-producto"]').cloneNode(true);;
+        newLabelProducto.htmlFor = 'id_items_venta-'+forms.value+'-producto'
+
+        //Actualización de id y name para input producto
+        var newProducto = document.querySelector('#id_items_venta-0-producto').cloneNode(true);
+        newProducto.name = 'items_venta-'+forms.value+'-producto'
+        newProducto.id = 'id_items_venta-'+forms.value+'-producto'
+
+        //Actualización de for para label cantidad
+        newLabelCantidad = document.querySelector('label[for="id_items_venta-0-cantidad"]').cloneNode(true);;
+        newLabelCantidad.htmlFor = 'id_items_venta-'+forms.value+'-cantidad'
+
+        //Actualización de id y name para input cantidad
+        var newCantidad = document.querySelector('#id_items_venta-0-cantidad').cloneNode(true);
+        newCantidad.name = 'items_venta-'+forms.value+'-cantidad'
+        newCantidad.id = 'id_items_venta-'+forms.value+'-cantidad'
+
+        var p1 = document.createElement("p");
+        var p2 = document.createElement("p");
+
+        document.querySelector('#formset-container').appendChild(newLabelProducto)
+        document.querySelector('#formset-container').appendChild(newProducto)
+        document.querySelector('#formset-container').appendChild(p1)
+
+        document.querySelector('#formset-container').appendChild(newLabelCantidad)
+        document.querySelector('#formset-container').appendChild(newCantidad)
+        document.querySelector('#formset-container').appendChild(p2)
+
+        forms.value = parseInt(forms.value) + 1
+    }
+    */

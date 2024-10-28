@@ -1,0 +1,64 @@
+{% extends "base/base.html" %}
+{% load static%}
+{% block titulo %}Empleados{% endblock %}
+{% block contenido_principal %}
+    <div class="container-fluid text-center rounded cabecera mt-5">
+        <header id="home">
+            <h1>Empleados</h1>
+        </header>
+    </div>
+    <div class="container-fluid mt-3 mb-3">
+        <a href="{% url 'empleado:crear_empleado' %}" class="btn btn-primary">
+            AGREGAR
+        </a>
+        <p></p>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Cuit</th>
+                    <th>Nombre Completo</th>
+                    <th>Telefono</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Fecha de Incoporacion</th>
+                    <th>Domicilio </th>
+                    <th>Localidad</th>
+                    <th>Departamento</th>
+                    <th>Usuario</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for empleado in empleados %}
+                    <tr>
+                        <td>{{ empleado.cuit }}</td>
+                        <td>{{ empleado.nombre_completo }}</td>
+                        <td>{{ empleado.telefono }}</td>
+                        <td>{{ empleado.fecha_nacimiento }}</td>
+                        <td>{{ empleado.fechaa_incoporacion }}</td>
+                        <td>{{ empleado.domicilio_calle }} {{ empleado.domicilio_numero }}</td>
+                        <td>{{ empleado.domicilio_localidad }}</td>
+                        <td>{{ empleado.domicilio_departamento }}</td>
+                        <td>{{ empleado.usuario}}</td>
+                        <td><a href="{% url 'empleado:editar_empleado' empleado.id%}" class="btn btn-primary">
+                                    EDITAR
+                        </a></td>
+                        <td>
+                            <form action="{% url 'empleado:eliminar_empleado' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="id_empleado" value="{{ empleado.id }}">
+                                <input type="submit" value="ELIMINAR" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el Producto?');">
+                            </form>
+                        </td>
+
+
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">No hay empleados disponibles</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

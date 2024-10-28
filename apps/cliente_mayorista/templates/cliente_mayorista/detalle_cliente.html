@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+{% block titulo %}Detalle de Cliente{% endblock %}
+{% block contenido_principal %}
+<div class="container-fluid text-center rounded cabecera mt-5">
+    <header id="home">
+        <h1>Clientes Mayoristas</h1>
+        <h2>Detalle de cliente {{ cliente.nombre_completo }}</h2>
+    </header>
+</div>
+
+<div class="container-fluid mt-5">
+    <div class="container-fluid mt-4" style="background-color: darkred;">
+        <p><strong>Nombre: </strong> {{ cliente.nombre_completo }}</p>
+        <p><strong>Cuit: </strong> {{ cliente.cuit }}</p>
+        <p><strong>Telefono: </strong> {{ cliente.telefono }}</p>
+        <p><strong>Email: </strong> {{ cliente.email }}</p>
+        <p><strong>Domicilo: </strong> {{ cliente.domicilio_calle }} {{ cliente.domicilio_numero }}</p>
+        <p><strong>Localidad: </strong> {{ cliente.domicilio_localidad }}</p>
+        <p><strong>Departamento: </strong> {{ cliente.domicilio_departamento }}</p>
+    </div>
+
+    <h2>Compras realizadas</h2>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Tipo de venta</th>
+                <th>Forma de pago</th>
+                <th>Monto total</th>
+                <th>Más información</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for compra in compras_realizadas %}
+                <tr>
+                    <td>{{ compra.fecha_venta}}</td>
+                    <td>{{ compra.tipo_venta}}</td>
+                    <td>{{ compra.forma_pago}}</td>
+                    <td>{{ compra.monto_total}}</td>
+                    <td>
+                        <a href="{% url 'venta:detalle_venta' compra.id %}" class="btn btn-info">Ver Detalle</a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'cliente_mayorista:lista_clientesmayoristas' %}" class="btn btn-secondary mt-3">Volver al Listado</a>
+</div>
+{%endblock%}
