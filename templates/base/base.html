@@ -15,6 +15,12 @@
         <link href="{% static 'css/estilos.css' %}" rel="stylesheet">
 
         <style>
+            fieldset.formulario {
+                background-color:
+                    rgba(235, 152, 78, 0.8);
+
+                font-family: 'Georgia', serif;
+            }
             footer {
                 background-color: #3E2723; /* Marrón oscuro */
                 color: #FFEB3B; /* Amarillo suave */
@@ -52,7 +58,7 @@
                 color: #FFC107;
             }
 
-            .cabecera {
+            .cab {
             background-color: #3E2723; /* Marrón oscuro */
             color: #FFEB3B; /* Amarillo suave */
             padding: 2rem 1rem;
@@ -60,19 +66,24 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .cabecera h1 {
+        .cab h1 {
             font-family: 'Georgia', serif;
             font-weight: 700;
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
         }
 
-        .cabecera h2 {
+        .cab h2 {
             font-family: 'Arial', sans-serif;
             font-weight: 300;
             font-size: 1.5rem;
             margin-top: 0;
         }
+
+        .card {
+            background-color: rgba(235, 152, 78, 0.75); /* Cambia el color aquí */
+
+}
         </style>
 
     </head>
@@ -93,22 +104,23 @@
                             <a class="nav-link" href="{% url 'home' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Ventas</a>
+                            <a class="nav-link" href="{% url 'venta:lista_ventas' %}">Ventas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Productos</a>
+                            <a class="nav-link" href="{% url 'producto:lista_productos' %}">Productos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Clientes mayoristas</a>
+                            <a class="nav-link" href="{% url 'cliente_mayorista:lista_clientesmayoristas' %}">Clientes mayoristas</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Pedidos
+                                Materia prima
                             </a>
                             <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Listado materia prima</a></li>
                                 <li><a class="dropdown-item" href="#">Registrar pedido</a></li>
                                 <li><a class="dropdown-item" href="#">Recepcionar pedido</a></li>
-                                <li><a class="dropdown-item" href="#">Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Registrar proveedor</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

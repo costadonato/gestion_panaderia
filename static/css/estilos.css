@@ -1,9 +1,10 @@
-
-
 div.contenedor-cuerpo{
                       font-family: arial, Helvetica, sans-serif;
                       margin-top:4em;
-                      background-image: url("../IMG/dibujo-panes.jpg")
+                      /*background-image: url("../img/dibujo-panes.jpg")*/
+                      background-image: url("../img/fondo.jpg")
+
+
                       }
 
 div.cabecera{background-color: darkred;
@@ -13,7 +14,6 @@ div.cabecera{background-color: darkred;
             margin-bottom: 2em;
             text-align: center;
             }
-
 
 fieldset.formulario{background-color: #ffeae4}
 
@@ -33,7 +33,6 @@ div.tabla thead th {
     z-index: 2; /* Asegura que el thead quede por encima del contenido */
     background-color: #f8f9fa; /* Color de fondo similar al utilizado por Bootstrap */
 }
-
 
 .card {
     transition: transform 0.3s ease;
