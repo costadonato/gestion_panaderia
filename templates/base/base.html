@@ -82,17 +82,46 @@
 
         .card {
             background-color: rgba(235, 152, 78, 0.75); /* Cambia el color aquí */
+        }
 
-}
+        .btn-primary {
+          background-color: rgba(235, 152, 78, 0.8);
+          outline: none;
+          box-shadow: none;
+        }
+
+        .btn-primary:hover {
+          background-color: rgba(235, 152, 78);
+        }
+
+        .btn-success {
+            background-color: rgb(62, 39, 35, 0.8); /* Marrón oscuro */
+            color: #FFEB3B;
+            }
+
+        .btn-success:hover {
+            background-color: rgb(62, 39, 35); /* Marrón oscuro */
+            color: #FFEB3B;
+        }
+
+        .table {
+            background-color: rgba(235, 152, 78);
+            border-color: #FFEB3B;
+        }
+
+        .table th,
+        .table td {
+            background-color: rgba(235, 152, 78);
+        }
         </style>
 
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <nav class="navbar navbar-expand-lg fixed-top" style="background-color: rgba(235, 152, 78);">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="{% static 'img/logo2.png' %}" alt="Logo" width="108" height="43" class="d-inline-block align-text-top">
+                    <img src="{% static 'img/logo.png' %}" alt="Logo" width="108" height="43" class="d-inline-block align-text-top">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,7 +145,7 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Materia prima
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" style="background-color: rgba(235, 152, 78);">
                                 <li><a class="dropdown-item" href="#">Listado materia prima</a></li>
                                 <li><a class="dropdown-item" href="#">Registrar pedido</a></li>
                                 <li><a class="dropdown-item" href="#">Recepcionar pedido</a></li>
@@ -127,7 +156,7 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Informes
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" style="background-color: rgba(235, 152, 78);">
                                 <li><a class="dropdown-item" href="#">Ventas</a></li>
                                 <li><a class="dropdown-item" href="#">Productos más vendidos</a></li>
                                 <li><a class="dropdown-item" href="#">Vendedores con más ventas</a></li>
