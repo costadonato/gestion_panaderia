@@ -15,6 +15,12 @@
         <link href="{% static 'css/estilos.css' %}" rel="stylesheet">
 
         <style>
+            fieldset.formulario {
+                background-color:
+                    rgba(235, 152, 78, 0.8);
+
+                font-family: 'Georgia', serif;
+            }
             footer {
                 background-color: #3E2723; /* Marrón oscuro */
                 color: #FFEB3B; /* Amarillo suave */
@@ -52,7 +58,7 @@
                 color: #FFC107;
             }
 
-            .cabecera {
+            .cab {
             background-color: #3E2723; /* Marrón oscuro */
             color: #FFEB3B; /* Amarillo suave */
             padding: 2rem 1rem;
@@ -60,28 +66,68 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .cabecera h1 {
+        .cab h1 {
             font-family: 'Georgia', serif;
             font-weight: 700;
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
         }
 
-        .cabecera h2 {
+        .cab h2 {
             font-family: 'Arial', sans-serif;
             font-weight: 300;
             font-size: 1.5rem;
             margin-top: 0;
+        }
+
+        .card {
+            background-color: rgba(235, 152, 78, 0.75); /* Cambia el color aquí */
+        }
+
+        .btn-primary {
+          background-color: rgba(235, 152, 78, 0.8);
+          outline: none;
+          box-shadow: none;
+        }
+
+        .btn-primary:hover {
+          background-color: rgba(235, 152, 78);
+        }
+
+        .btn-success {
+            background-color: rgb(62, 39, 35, 0.8); /* Marrón oscuro */
+            color: #FFEB3B;
+            }
+
+        .btn-success:hover {
+            background-color: rgb(62, 39, 35); /* Marrón oscuro */
+            color: #FFEB3B;
+        }
+
+        .table {
+            background-color: rgba(235, 152, 78);
+            border-color: #FFEB3B;
+        }
+
+        .table th {
+            background-color: rgba(235, 152, 78);
+        }
+        .table td {
+            background-color: rgba(235, 152, 78);
+        }
+        .detalle {
+            background-color: #3E2723; /* Marrón oscuro */
+            color: #FFEB3B; /* Amarillo suave */
         }
         </style>
 
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <nav class="navbar navbar-expand-lg fixed-top" style="background-color: rgba(235, 152, 78);">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="{% static 'img/logo2.png' %}" alt="Logo" width="108" height="43" class="d-inline-block align-text-top">
+                    <img src="{% static 'img/logo.png' %}" alt="Logo" width="108" height="43" class="d-inline-block align-text-top">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,29 +139,30 @@
                             <a class="nav-link" href="{% url 'home' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Ventas</a>
+                            <a class="nav-link" href="{% url 'venta:lista_ventas' %}">Ventas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Productos</a>
+                            <a class="nav-link" href="{% url 'producto:lista_productos' %}">Productos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Clientes mayoristas</a>
+                            <a class="nav-link" href="{% url 'cliente_mayorista:lista_clientesmayoristas' %}">Clientes mayoristas</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Pedidos
+                                Materia prima
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" style="background-color: rgba(235, 152, 78);">
+                                <li><a class="dropdown-item" href="#">Listado materia prima</a></li>
                                 <li><a class="dropdown-item" href="#">Registrar pedido</a></li>
                                 <li><a class="dropdown-item" href="#">Recepcionar pedido</a></li>
-                                <li><a class="dropdown-item" href="#">Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Registrar proveedor</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Informes
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" style="background-color: rgba(235, 152, 78);">
                                 <li><a class="dropdown-item" href="#">Ventas</a></li>
                                 <li><a class="dropdown-item" href="#">Productos más vendidos</a></li>
                                 <li><a class="dropdown-item" href="#">Vendedores con más ventas</a></li>

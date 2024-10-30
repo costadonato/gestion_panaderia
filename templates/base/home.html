@@ -3,7 +3,7 @@
 {% block titulo %}Panadería El Maná{% endblock %}
 {% block contenido_principal %}
     <div class="container-fluid contenedor-cuerpo">
-        <div class="cabecera container-fluid text-center rounded ">
+        <div class="cab container-fluid text-center rounded ">
             <header>
                 <h1>PANADERÍA EL MANÁ</h1>
                 <h2>PÁGINA PRINCIPAL</h2>
@@ -70,7 +70,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Clientes mayoristas</h5>
                             <p class="card-text">Ofrecemos servicios especiales para nuestros clientes mayoristas. Toda su información aquí.</p>
-                            <a href="#" class="btn btn-success">ACCEDER</a>
+                            <a href="{% url 'cliente_mayorista:lista_clientesmayoristas' %}" class="btn btn-success">ACCEDER</a>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Empleados</h5>
                             <p class="card-text">Información completa sobre todos los empleados, modificar información.</p>
-                            <a href="#" class="btn btn-success">ACCEDER</a>
+                            <a href="{% url 'empleado:listar_empleados' %}" class="btn btn-success">ACCEDER</a>
                         </div>
                     </div>
                 </div>
