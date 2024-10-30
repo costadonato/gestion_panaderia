@@ -3,6 +3,7 @@ from xml.dom.minidom import Document
 from django.db.models import F
 from django.shortcuts import render
 
+from apps.pedido.models import MateriaPrima
 from apps.producto.models import Producto
 from apps.venta.models import Venta
 
@@ -33,3 +34,8 @@ def informe_productos_faltantes(request):
     productos = Producto.objects.all()
     productos_faltantes = productos.filter(cantidad__lt = F('cantidadMinima'))
     return render(request, 'informe/informe_productos_faltantes.html', {'productos_faltantes': productos_faltantes})
+
+def informe_matprima_faltante(request):
+    materia_prima = MateriaPrima.objects.all()
+    materia_prima_faltante = materia_prima.filter(cant_disponible__lt = F('cantidadMinima'))
+    return render(request, 'informe/informe_matprima_faltante.html', {'materia_prima_faltante': materia_prima_faltante})

@@ -8,5 +8,6 @@ urlpatterns = [
     path('',TemplateView.as_view(template_name='informe/home_informes.html') , name='informes'),
     path('ventas/filtradas', views.informe_ventas_filtradas, name='informe_ventas_filtradas'),
     path('ventas', views.informe_ventas, name='informe_ventas'),
-    path('prod_faltantes', views.informe_productos_faltantes, name='prod_faltantes')
+    path('prod_faltantes', views.informe_productos_faltantes, name='prod_faltantes'),
+    path('matprima_faltante', views.informe_matprima_faltante, name='matprima_faltante')
 ]
