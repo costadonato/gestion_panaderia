@@ -1,0 +1,61 @@
+{% extends "base/base.html" %}
+{% load static%}
+{% block titulo %}Productos{% endblock %}
+{% block contenido_principal %}
+    <div class="container-fluid text-center rounded cab mt-5">
+        <header id="home">
+            <h1>INFORMES</h1>
+            <h2>Productos faltantes</h2>
+        </header>
+    </div>
+    <div class="container-fluid mt-3 mb-3">
+        <br>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Unidad Medida</th>
+                    <th>Stock</th>
+                    <th>Cantidad min</th>
+                    <th>Tipo</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos_faltantes %}
+                    <tr>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.descripcion }}</td>
+                        <td>{{ producto.precio }}</td>
+                        <td>{{ producto.unidadMedida }}</td>
+                        <td>{{ producto.cantidad }}</td>
+                        <td>{{producto.cantidadMinima}}</td>
+                        <td>{{ producto.tipo }}</td>
+                        <td><a href="{% url 'producto:editar_producto' producto.id%}" class="btn btn-primary">
+                                    EDITAR
+                        </a></td>
+                        <td>
+                            <form action="{% url 'producto:eliminar_producto' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="id_producto" value="{{ producto.id }}">
+                                <input type="submit" value="ELIMINAR" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el Producto?');">
+                            </form>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">No hay productos disponibles</td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+        <a href="/informes/" class="btn btn-secondary mt-3">Volver a informes</a>
+    </div>
+
+
+{% endblock %}
