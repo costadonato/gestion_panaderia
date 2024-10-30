@@ -1,4 +1,4 @@
-# apps/materia_prima/forms.py
+
 
 from django import forms
 from django.forms import inlineformset_factory
@@ -9,7 +9,7 @@ from apps.pedido.models import MateriaPrima, Pedido, ItemPedido
 class NuevaMateriaPrimaForm(forms.ModelForm):
     class Meta:
         model = MateriaPrima
-        fields = ['nombre', 'cant_disponible', 'proveedor']
+        fields = ['nombre', 'cant_disponible','cantidadMinima', 'proveedor']
         widgets = {
             'proveedor': forms.Select(attrs={'class': 'form-control'}),
         }
@@ -22,7 +22,7 @@ class NuevaMateriaPrimaForm(forms.ModelForm):
 class ModificarMateriaPrimaForm(forms.ModelForm):
     class Meta:
         model = MateriaPrima
-        fields = ['nombre', 'cant_disponible', 'proveedor']
+        fields = ['nombre', 'cant_disponible','cantidadMinima', 'proveedor']
         widgets = {
             'proveedor': forms.Select(attrs={'class': 'form-control'}),
         }

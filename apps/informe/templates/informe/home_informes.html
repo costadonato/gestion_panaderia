@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Ventas</h5>
                             <p class="card-text">Explora todas las ventas realizadas por la panadería, con diferentes filtros para una mejor búsqueda.</p>
-                            <a href="{% url 'producto:lista_productos' %}" class="btn btn-success">ACCEDER</a>
+                            <a href="{% url 'informe:informe_ventas' %}" class="btn btn-success">ACCEDER</a>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Productos más vendidos</h5>
                             <p class="card-text">Los productos más vendidos por la panadería en diferentes periodos de tiempo.</p>
-                            <a href="{% url 'pedido:lista_pedidos' %}" class="btn btn-success">ACCEDER</a>
+                            <a href="{% url 'informe:productos_mas_vendidos' %}" class="btn btn-success">ACCEDER</a>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Vendedores con más ventas</h5>
                             <p class="card-text">Información sobre los vendedores con mejor rendimiento en cuanto a ventas. </p>
-                            <a href="{% url 'proveedor:lista_proveedor' %}" class="btn btn-success">ACCEDER</a>
+                            <a href="{% url 'informe:vendedores_mas_ventas' %}" class="btn btn-success">ACCEDER</a>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Materia prima faltante</h5>
                             <p class="card-text">Listado sobre materia prima en escasez, se necesita pedir más a los proveedores!</p>
-                            <a href="{% url 'proveedor:lista_proveedor' %}" class="btn btn-success">ACCEDER</a>
+                            <a href="{% url 'informe:matprima_faltante' %}" class="btn btn-success">ACCEDER</a>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Productos faltantes</h5>
                             <p class="card-text">Listado sobre los productos en escasez, se necesita producir más!</p>
-                            <a href="{% url 'proveedor:lista_proveedor' %}" class="btn btn-success">ACCEDER</a>
+                            <a href="{% url 'informe:prod_faltantes' %}" class="btn btn-success">ACCEDER</a>
                         </div>
                     </div>
                 </div>

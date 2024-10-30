@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 class Producto(models.Model):
     UNIDAD_MEDIDA_CHOICES = [
-        ('kg', 'Kilogramos'),
-        ('unid', 'Unidades')
+        ('Kg', 'Kilogramos'),
+        ('U', 'Unidades')
     ]
 
     TIPO_CHOICES = [
@@ -24,24 +24,3 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombre
 
-
-    def venta_producto(self, cant):
-        if self.cantidad >= cant:
-            self.cantidad -= cant
-            print("VENIDO")
-        else:
-            print("NO SE CUENTA CON STOCK SUFICIENTE")
-
-
-    def aumento_stock(self, cant):
-            self.cantidad += cant
-            print("STOCK ACTUALIZADO")
-
-    def dar_baja(self):
-        self.estado = False
-
-    """
-    PREGUNTAR
-    No escribo la función modificar, ya que intuimos que estas funciones 
-    deberían ser views y no métodos de la clase Producto. 
-    """

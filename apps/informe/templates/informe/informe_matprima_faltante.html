@@ -1,0 +1,51 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block titulo %}Materias Primas{% endblock %}
+{% block contenido_principal %}
+<div class="container-fluid mt-5">
+    <div class="container-fluid text-center rounded cab mt-5">
+        <header id="home">
+            <h1>INFORMES</h1>
+            <h2>Listado de materia prima faltante</h2>
+        </header>
+    </div>
+
+    <div class="container-fluid mt-3 mb-3">
+        <p></p>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad Disponible</th>
+                    <th>Proveedor</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for materia in materia_prima_faltante %}
+                    <tr>
+                        <td>{{ materia.nombre }}</td>
+                        <td>{{ materia.cant_disponible }}</td>
+                        <td>{{ materia.proveedor }}</td>
+                        <td><a href="{% url 'materia_prima:editar_materia_prima' materia.id %}" class="btn btn-primary">EDITAR</a></td>
+                        <td>
+                            <form action="{% url 'materia_prima:eliminar_materia_prima' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="id_materia" value="{{ materia.id }}">
+                                <input type="submit" value="ELIMINAR" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar esta Materia Prima?');">
+                            </form>
+                        </td>
+                    </tr>
+
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No hay materias primas disponibles</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/informes/" class="btn btn-secondary mt-3">Volver a informes</a>
+    </div>
+</div>
+{% endblock %}

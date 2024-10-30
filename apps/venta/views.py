@@ -48,3 +48,4 @@ def detalle_venta(request, venta_id):
     venta = get_object_or_404(Venta, id=venta_id)  # Obtener la venta específica
     items = Item.objects.filter(venta=venta)  # Obtener los items relacionados a esta venta
     return render(request, 'venta/detalle_venta.html', {'venta': venta, 'items':items})
+

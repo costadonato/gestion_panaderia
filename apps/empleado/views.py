@@ -44,3 +44,4 @@ def eliminar_empleado(request):
         else:
             messages.error(request, 'Debe indicar qué empleado que se desea eliminar')
     return redirect(reverse('empleado:listar_empleados'))
+

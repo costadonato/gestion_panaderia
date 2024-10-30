@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+{% block titulo %}Empleados con Más Ventas{% endblock %}
+{% block contenido_principal %}
+<div class="container-fluid text-center rounded cab mt-5">
+        <header id="home">
+            <h1>INFORMES</h1>
+            <h2>Vendedores con más ventas</h2>
+        </header>
+</div>
+
+<div class="container-fluid mt-5 detalle" style="max-width: 800px;">
+    <!-- Formulario de Filtros -->
+    <form action="{% url 'informe:vendedores_mas_ventas' %}" method="POST" class="row mb-4">
+        {% csrf_token %}
+        <div class="col-md-4 mt-3">
+            <label for="fec_inicio">Fecha inicio</label>
+            <input type="date" name="fec_inicio" id="fec_inicio" class="form-control">
+        </div>
+        <div class="col-md-4 mt-3">
+            <label for="fec_fin">Fecha fin</label>
+            <input type="date" name="fec_fin" id="fec_fin" class="form-control">
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <button type="submit" class="btn btn-secondary">Filtrar</button>
+        </div>
+    </form>
+
+    <!-- Tabla de Empleados con Más Ventas -->
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Empleado</th>
+                <th>Cantidad de Ventas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for empleado in empleados_mas_ventas %}
+                <tr>
+                    <td>{{ empleado.empleado__nombre_completo }}</td>
+                    <td>{{ empleado.total_ventas }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/informes/" class="btn btn-secondary mt-3">Volver a informes</a>
+</div>
+
+
+{% endblock %}
