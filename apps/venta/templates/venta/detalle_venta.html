@@ -9,7 +9,7 @@
 </div>
 
 <div class="container-fluid mt-5">
-    <div class="container-fluid mt-4" style="background-color: darkred;">
+    <div class="container-fluid mt-4 detalle" >
         <p><strong>Fecha de Registro:</strong> {{ venta.fecha_venta|date:"d-m-Y h:i"}}</p>
         <p id="tipo_cliente"><strong>Tipo Cliente:</strong> {{ venta.tipo_cliente }}</p>
         {% if venta.tipo_cliente == "Mayorista" %}
