@@ -11,100 +11,115 @@
         </div>
 
         <div class="container-fluid mt-3 mb-3">
-
             <div class="row row-cols-1 row-cols-md-4 g-5">
-                <div class="col">
-                    <div class="card h-100 text-center">
-                        <img src="{% static 'img/ventas.png' %}" class="card-img-top" alt="Ventas">
-                        <div class="card-body">
-                            <h5 class="card-title">Ventas</h5>
-                            <p class="card-text">Realizar una nueva venta, información sobre ventas realizadas, actualizar precios</p>
-                            <a href="{% url 'venta:lista_ventas' %}" class="btn btn-success">ACCEDER</a>
+                {% if perms.venta.view_venta %}
+                    <div class="col">
+                        <div class="card h-100 text-center">
+                            <img src="{% static 'img/ventas.png' %}" class="card-img-top" alt="Ventas">
+                            <div class="card-body">
+                                <h5 class="card-title">Ventas</h5>
+                                <p class="card-text">Realizar una nueva venta, información sobre ventas realizadas, actualizar precios</p>
+                                <a href="{% url 'venta:lista_ventas' %}" class="btn btn-success">ACCEDER</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 text-center">
-                        <img src="{% static 'img/productopan.jpg' %}" class="card-img-top" alt="Productos">
-                        <div class="card-body">
-                            <h5 class="card-title">Productos</h5>
-                            <p class="card-text">Explora nuestra variedad de productos recién horneados, con variedad en panificación y pastelería.</p>
-                            <a href="{% url 'producto:lista_productos' %}" class="btn btn-success">ACCEDER</a>
+                {% endif %}
+                {% if perms.producto.view_producto %}
+                    <div class="col">
+                        <div class="card h-100 text-center">
+                            <img src="{% static 'img/productopan.jpg' %}" class="card-img-top" alt="Productos">
+                            <div class="card-body">
+                                <h5 class="card-title">Productos</h5>
+                                <p class="card-text">Explora nuestra variedad de productos recién horneados, con variedad en panificación y pastelería.</p>
+                                <a href="{% url 'producto:lista_productos' %}" class="btn btn-success">ACCEDER</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 text-center">
-                        <img src="{% static 'img/materiaprima4.jpg' %}" class="card-img-top" alt="Materia prima">
-                        <div class="card-body">
-                            <h5 class="card-title">Materia prima</h5>
-                            <p class="card-text">Explora nuestra variedad materia prima, de la mejor calidad y obtenida gracias a los mejores proveedores.</p>
-                            <a href="{% url 'pedido:lista_materia_prima' %}" class="btn btn-success">ACCEDER</a>
+                {% endif %}
+                {% if perms.pedido.view_pedido %}
+                    <div class="col">
+                        <div class="card h-100 text-center">
+                            <img src="{% static 'img/materiaprima4.jpg' %}" class="card-img-top" alt="Materia prima">
+                            <div class="card-body">
+                                <h5 class="card-title">Materia prima</h5>
+                                <p class="card-text">Explora nuestra variedad materia prima, de la mejor calidad y obtenida gracias a los mejores proveedores.</p>
+                                <a href="{% url 'pedido:lista_materia_prima' %}" class="btn btn-success">ACCEDER</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 text-center">
-                        <img src="{% static 'img/ver-pedidos.png' %}" class="card-img-top" alt="Pedidos">
-                        <div class="card-body">
-                            <h5 class="card-title">Pedidos</h5>
-                            <p class="card-text">Realizar un nuevo pedido, gestiona todos los pedidos realizados</p>
-                            <a href="{% url 'pedido:lista_pedidos' %}" class="btn btn-success">ACCEDER</a>
+                {% endif %}
+                {% if perms.pedido.view_pedido %}
+                    <div class="col">
+                        <div class="card h-100 text-center">
+                            <img src="{% static 'img/ver-pedidos.png' %}" class="card-img-top" alt="Pedidos">
+                            <div class="card-body">
+                                <h5 class="card-title">Pedidos</h5>
+                                <p class="card-text">Realizar un nuevo pedido, gestiona todos los pedidos realizados</p>
+                                <a href="{% url 'pedido:lista_pedidos' %}" class="btn btn-success">ACCEDER</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 text-center">
-                        <img src="{% static 'img/proveedor2.jpg' %}" class="card-img-top" alt="Proveedores">
-                        <div class="card-body">
-                            <h5 class="card-title">Proveedores</h5>
-                            <p class="card-text">Información completa de todos los proveedores con los que trabajamos </p>
-                            <a href="{% url 'proveedor:lista_proveedor' %}" class="btn btn-success">ACCEDER</a>
+                {% endif %}
+                {% if perms.proveedor.view_proveedor %}
+                    <div class="col">
+                        <div class="card h-100 text-center">
+                            <img src="{% static 'img/proveedor2.jpg' %}" class="card-img-top" alt="Proveedores">
+                            <div class="card-body">
+                                <h5 class="card-title">Proveedores</h5>
+                                <p class="card-text">Información completa de todos los proveedores con los que trabajamos </p>
+                                <a href="{% url 'proveedor:lista_proveedor' %}" class="btn btn-success">ACCEDER</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col">
-                    <div class="card h-100 text-center">
-                        <img src="{% static 'img/mayorista.jpeg' %}" class="card-img-top" alt="Clientes mayoristas">
-                        <div class="card-body">
-                            <h5 class="card-title">Clientes mayoristas</h5>
-                            <p class="card-text">Ofrecemos servicios especiales para nuestros clientes mayoristas. Toda su información aquí.</p>
-                            <a href="{% url 'cliente_mayorista:lista_clientesmayoristas' %}" class="btn btn-success">ACCEDER</a>
+                {% endif %}
+                {% if perms.cliente_mayorista.view_cliente_mayorista %}
+                    <div class="col">
+                        <div class="card h-100 text-center">
+                            <img src="{% static 'img/mayorista.jpeg' %}" class="card-img-top" alt="Clientes mayoristas">
+                            <div class="card-body">
+                                <h5 class="card-title">Clientes mayoristas</h5>
+                                <p class="card-text">Ofrecemos servicios especiales para nuestros clientes mayoristas. Toda su información aquí.</p>
+                                <a href="{% url 'cliente_mayorista:lista_clientesmayoristas' %}" class="btn btn-success">ACCEDER</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 text-center">
-                        <img src="{% static 'img/empleados%202.png' %}" class="card-img-top" alt="Empleados">
-                        <div class="card-body">
-                            <h5 class="card-title">Empleados</h5>
-                            <p class="card-text">Información completa sobre todos los empleados, modificar información.</p>
-                            <a href="{% url 'empleado:listar_empleados' %}" class="btn btn-success">ACCEDER</a>
+                {% endif %}
+                {% if perms.empleado.view_empleado %}
+                    <div class="col">
+                        <div class="card h-100 text-center">
+                            <img src="{% static 'img/empleados%202.png' %}" class="card-img-top" alt="Empleados">
+                            <div class="card-body">
+                                <h5 class="card-title">Empleados</h5>
+                                <p class="card-text">Información completa sobre todos los empleados, modificar información.</p>
+                                <a href="{% url 'empleado:listar_empleados' %}" class="btn btn-success">ACCEDER</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 text-center">
-                        <img src="{% static 'img/informe2.jpg' %}" class="card-img-top" alt="Informes">
-                        <div class="card-body">
-                            <h5 class="card-title">Informes</h5>
-                            <p class="card-text">Accede a informes detallados sobre la gestión de la panadería.</p>
-                            <a href="{% url 'informe:informes' %}" class="btn btn-success">ACCEDER</a>
+                {% endif %}
+                {% if perms.informe.view_informe %}
+                    <div class="col">
+                        <div class="card h-100 text-center">
+                            <img src="{% static 'img/informe2.jpg' %}" class="card-img-top" alt="Informes">
+                            <div class="card-body">
+                                <h5 class="card-title">Informes</h5>
+                                <p class="card-text">Accede a informes detallados sobre la gestión de la panadería.</p>
+                                <a href="{% url 'informe:informes' %}" class="btn btn-success">ACCEDER</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 text-center">
-                        <img src="{% static 'img/perfiles.png' %}" class="card-img-top" alt="Administración de perfiles">
-                        <div class="card-body">
-                            <h5 class="card-title">Administración de perfiles</h5>
-                            <p class="card-text">Contemplar diferentes perfiles de usuario y el control de permisos para cada perfil de usuario.</p>
-                            <a href="#" class="btn btn-success">ACCEDER</a>
+                {% endif %}
+                {% if perms.usuario.view_user %}
+                    <div class="col">
+                        <div class="card h-100 text-center">
+                            <img src="{% static 'img/perfiles.png' %}" class="card-img-top" alt="Administración de perfiles">
+                            <div class="card-body">
+                                <h5 class="card-title">Administración de perfiles</h5>
+                                <p class="card-text">Contemplar diferentes perfiles de usuario y el control de permisos para cada perfil de usuario.</p>
+                                <a href="{% url 'admin:index' %}" class="btn btn-success">ACCEDER</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
+                {% endif %}
             </div>
         </div>
     </div>

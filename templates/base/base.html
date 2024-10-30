@@ -124,6 +124,7 @@
     </head>
 
     <body>
+
         <nav class="navbar navbar-expand-lg fixed-top" style="background-color: rgba(235, 152, 78);">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'home' %}">
@@ -133,48 +134,68 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                {% if user.is_authenticated %}
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'home' %}">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'venta:lista_ventas' %}">Ventas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'producto:lista_productos' %}">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'cliente_mayorista:lista_clientesmayoristas' %}">Clientes mayoristas</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Materia prima
-                            </a>
-                            <ul class="dropdown-menu" style="background-color: rgba(235, 152, 78);">
-                                <li><a class="dropdown-item" href="#">Listado materia prima</a></li>
-                                <li><a class="dropdown-item" href="#">Registrar pedido</a></li>
-                                <li><a class="dropdown-item" href="#">Recepcionar pedido</a></li>
-                                <li><a class="dropdown-item" href="#">Registrar proveedor</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Informes
-                            </a>
-                            <ul class="dropdown-menu" style="background-color: rgba(235, 152, 78);">
-                                <li><a class="dropdown-item" href="#">Ventas</a></li>
-                                <li><a class="dropdown-item" href="#">Productos más vendidos</a></li>
-                                <li><a class="dropdown-item" href="#">Vendedores con más ventas</a></li>
-                                <li><a class="dropdown-item" href="#">Materia prima faltante</a></li>
-                                <li><a class="dropdown-item" href="#">Productos faltantes</a></li>
-                            </ul>
-                        </li>
+                        {% if perms.venta.view_venta %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'venta:lista_ventas' %}">Ventas</a>
+                            </li>
+                        {% endif %}
+                        {% if perms.producto.view_producto %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'producto:lista_productos' %}">Productos</a>
+                            </li>
+                        {% endif %}
+                        {% if perms.cliente_mayorista.view_cliente_mayorista %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'cliente_mayorista:lista_clientesmayoristas' %}">Clientes mayoristas</a>
+                            </li>
+                        {% endif %}
+                        {% if perms.pedido.view_pedido %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Materia prima
+                                </a>
+                                <ul class="dropdown-menu" style="background-color: rgba(235, 152, 78);">
+                                    <li><a class="dropdown-item" href="#">Listado materia prima</a></li>
+                                    <li><a class="dropdown-item" href="#">Registrar pedido</a></li>
+                                    <li><a class="dropdown-item" href="#">Recepcionar pedido</a></li>
+                                    <li><a class="dropdown-item" href="#">Registrar proveedor</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% if perms.informe.view_informe %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Informes
+                                </a>
+                                <ul class="dropdown-menu" style="background-color: rgba(235, 152, 78);">
+                                    <li><a class="dropdown-item" href="#">Ventas</a></li>
+                                    <li><a class="dropdown-item" href="#">Productos más vendidos</a></li>
+                                    <li><a class="dropdown-item" href="#">Vendedores con más ventas</a></li>
+                                    <li><a class="dropdown-item" href="#">Materia prima faltante</a></li>
+                                    <li><a class="dropdown-item" href="#">Productos faltantes</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
                     </ul>
-
+                    <span class="navbar-text ms-auto">
+                        {% if user.is_authenticated %}
+                            {{ user.username }}
+                            <a class="btn btn-outline-success me-2" href="{% url 'usuario:logout' %}">Cerrar sesión</a>
+                        {% else %}
+                            <a class="btn btn-outline-primary me-2" href="{% url 'usuario:login' %}">Iniciar sesión</a>
+                        {% endif %}
+                    </span>
                 </div>
+                {% endif %}
             </div>
         </nav>
+
 
 
         <div class="container-fluid contenedor-cuerpo  mt-4">

@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
@@ -6,16 +7,15 @@ from apps.producto.forms import NuevoProductoForm, ModificarProductoForm
 from apps.producto.models import Producto
 
 
-# Create your views here.
+@login_required(login_url='usuario:login')
+@permission_required('producto.view_producto', raise_exception=True)
 def lista_productos(request):
     productos = Producto.objects.all()
     return render(request, 'producto/lista_productos.html', {'productos': productos})
 
 
-
-
-
-
+@login_required(login_url='usuario:login')
+@permission_required('producto.add_producto', raise_exception=True)
 def nuevo_producto(request):
     nuevo_prod = None
     if request.method == 'POST':
@@ -35,7 +35,8 @@ def nuevo_producto(request):
     return render(request, 'producto/producto_form.html', {'form': producto_form})
 
 
-
+@login_required(login_url='usuario:login')
+@permission_required('producto.change_producto', raise_exception=True)
 def editar_producto(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
     if request.method == 'POST':
@@ -50,7 +51,8 @@ def editar_producto(request, pk):
     return render(request, 'producto/producto_form.html', {'form': producto_form})
 
 
-
+@login_required(login_url='usuario:login')
+@permission_required('producto.delete_producto', raise_exception=True)
 def eliminar_producto(request):
     if request.method == 'POST':
         if 'id_producto' in request.POST:

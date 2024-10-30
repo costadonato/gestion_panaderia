@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,8 +27,10 @@ urlpatterns = [
     path('ventas/', include('apps.venta.urls', namespace='venta')),
     path('materiaprima/', include('apps.pedido.urls', namespace='pedido')),
     path('proveedor/', include('apps.proveedor.urls', namespace='proveedor')),
-    path('', TemplateView.as_view(template_name='base/home.html'), name='home'),
     path('informes/', include('apps.informe.urls', namespace='informe')),
     path('cliente-mayorista/', include('apps.cliente_mayorista.urls', namespace='cliente_mayorista')),
     path('empleados/', include('apps.empleado.urls', namespace='empleado')),
+    path('', include('apps.usuario.urls', namespace='usuario')),
+    path('', views.home, name='home')
+    #path('', TemplateView.as_view(template_name='base/home.html'), name='home'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

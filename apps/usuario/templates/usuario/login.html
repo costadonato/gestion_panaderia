@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+{% block titulo %}Inicio Sesión{% endblock %}
+{% block contenido_principal %}
+    <div class="container-fluid text-center rounded cab mt-5">
+        <header id="home">
+            <h1>Iniciar sesión</h1>
+            <p>Ingrese sus credenciales para Ingresar al Sistema</p>
+        </header>
+    </div>
+    <!--<hr class="w-75">-->
+    {% if msj %}
+
+        <div class="container-fluid mt-4 detalle">{{ msj }}</div>
+    {% endif %}
+    <fieldset class="rounded border formulario">
+        <form action="{% url 'usuario:login' %}" method="post" class="w-75">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label" for="username">Nombre de Usuario: </label>
+                <input type="text" id="username" name="username" class="form-control" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="passw">Contraseña: </label>
+                <input type="password" id="passw" name="password" class="form-control" >
+            </div>
+            <input type="submit" class="btn btn-primary" value="Login">
+        </form>
+    </fieldset>
+
+{% endblock %}
