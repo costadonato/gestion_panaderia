@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
@@ -7,12 +8,15 @@ from apps.cliente_mayorista.forms import NuevoClienteMayoristaForm, ModificarCli
 from apps.venta.models import Venta
 
 
-# Create your views here.
+@login_required(login_url='usuario:login')
+@permission_required('cliente_mayorista.view_cliente_mayorista', raise_exception=True)
 def lista_clientesmayoristas(request):
     clientes_mayoristas = ClienteMayorista.objects.all()
     return render(request, 'cliente_mayorista/lista_clientesmayoristas.html', {'clientes_mayoristas': clientes_mayoristas})
 
 
+@login_required(login_url='usuario:login')
+@permission_required('cliente_mayorista.add_cliente_mayorista', raise_exception=True)
 def nuevo_clientemayorista(request):
     nuevo_clientem = None
     if request.method == 'POST':
@@ -27,8 +31,8 @@ def nuevo_clientemayorista(request):
 
     return render(request, 'cliente_mayorista/clientemayorista_form.html', {'form': clientemayorista_form})
 
-
-
+@login_required(login_url='usuario:login')
+@permission_required('cliente_mayorista.change_cliente_mayorista', raise_exception=True)
 def editar_clientemayorista(request, pk):
     clientemayorista = get_object_or_404(ClienteMayorista, pk=pk)
     if request.method == 'POST':
@@ -43,7 +47,8 @@ def editar_clientemayorista(request, pk):
     return render(request, 'cliente_mayorista/clientemayorista_form.html', {'form': clientemayorista_form})
 
 
-
+@login_required(login_url='usuario:login')
+@permission_required('cliente_mayorista.delete_cliente_mayorista', raise_exception=True)
 def eliminar_clientemayorista(request):
     if request.method == 'POST':
         if 'id_clientemayorista' in request.POST:
@@ -56,6 +61,8 @@ def eliminar_clientemayorista(request):
     return redirect(reverse('cliente_mayorista:lista_clientesmayoristas'))
 
 
+@login_required(login_url='usuario:login')
+@permission_required('cliente_mayorista.view_cliente_mayorista', raise_exception=True)
 def detalle_clientemayorista(request, pk):
     cliente = get_object_or_404(ClienteMayorista, id=pk)
     compras_realizadas = Venta.objects.filter(cliente_mayorista=cliente)  # Obtener las ventas relacionados a este cliente

@@ -1,5 +1,4 @@
-# apps/materia_prima/views.py
-
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib import messages
@@ -8,10 +7,15 @@ from apps.pedido.forms import NuevaMateriaPrimaForm, ModificarMateriaPrimaForm, 
 from apps.pedido.models import MateriaPrima, Pedido, ItemPedido
 
 
+@login_required(login_url='usuario:login')
+@permission_required('pedido.view_pedido', raise_exception=True)
 def lista_materia_prima(request):
     materia_prima = MateriaPrima.objects.all()
     return render(request, 'pedido/lista_materia_prima.html', {'materia_prima': materia_prima})
 
+
+@login_required(login_url='usuario:login')
+@permission_required('pedido.add_pedido', raise_exception=True)
 def nueva_materia_prima(request):
     if request.method == 'POST':
         form = NuevaMateriaPrimaForm(request.POST)
@@ -22,6 +26,9 @@ def nueva_materia_prima(request):
         form = NuevaMateriaPrimaForm()
     return render(request, 'pedido/materia_prima_form.html', {'form': form})
 
+
+@login_required(login_url='usuario:login')
+@permission_required('pedido.change_pedido', raise_exception=True)
 def editar_materia_prima(request, pk):
     materia = get_object_or_404(MateriaPrima, pk=pk)
     if request.method == 'POST':
@@ -34,6 +41,9 @@ def editar_materia_prima(request, pk):
         form = ModificarMateriaPrimaForm(instance=materia)
     return render(request, 'pedido/materia_prima_form.html', {'form': form})
 
+
+@login_required(login_url='usuario:login')
+@permission_required('pedido.delete_pedido', raise_exception=True)
 def eliminar_materia_prima(request):
     if request.method == 'POST':
         materia_id = request.POST.get('id_materia')
@@ -43,8 +53,18 @@ def eliminar_materia_prima(request):
         messages.success(request, f'Se ha eliminado {nombre_materia} exitosamente')
     return redirect(reverse('pedido:lista_materia_prima'))
 
+
+@login_required(login_url='usuario:login')
+@permission_required('pedido.view_pedido', raise_exception=True)
+def lista_pedidos(request):
+    pedidos = Pedido.objects.all()
+    return render(request, 'pedido/lista_pedidos.html', {'pedidos': pedidos})
+
+
+@login_required(login_url='usuario:login')
+@permission_required('pedido.add_pedido', raise_exception=True)
 def nuevo_pedido(request):
-    pedido_nuevo = None
+    pedido = None
     monto_total = 0
     if request.method == 'POST':
         pedido_form = NuevoPedidoForm(request.POST) #request.post es un objeto del tipo diccionario
@@ -75,10 +95,8 @@ def nuevo_pedido(request):
     })
 
 
-def lista_pedidos(request):
-    pedidos = Pedido.objects.all()
-    return render(request, 'pedido/lista_pedidos.html', {'pedidos': pedidos})
-
+@login_required(login_url='usuario:login')
+@permission_required('pedido.view_pedido', raise_exception=True)
 def detalle_pedido(request, pedido_id):
     pedido = get_object_or_404(Pedido, id=pedido_id)  # Obtener la venta específica
     items = ItemPedido.objects.filter(pedido=pedido)  # Obtener los items relacionados a esta venta

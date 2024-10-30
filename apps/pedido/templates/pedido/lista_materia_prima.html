@@ -14,9 +14,11 @@
         <a href="{% url 'materia_prima:nueva_materia_prima' %}" class="btn btn-primary">
             AGREGAR
         </a>
-        <a href="{% url 'proveedor:nuevo_proveedor' %}" class="btn btn-secondary">
-            REGISTRAR PROVEEDOR
-        </a>
+        {% if perms.pedido.add_pedido %}
+            <a href="{% url 'pedido:nuevo_pedido' %}" class="btn btn-secondary">
+                REGISTRAR PEDIDO
+            </a>
+        {% endif %}
         <p></p>
         <table class="table table-bordered table-striped">
             <thead>

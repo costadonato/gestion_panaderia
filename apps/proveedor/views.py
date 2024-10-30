@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
@@ -6,11 +7,15 @@ from apps.pedido.models import MateriaPrima
 from apps.proveedor.forms import NuevoProveedorForm, ModificarProveedorForm
 from apps.proveedor.models import Proveedor
 
-
+@login_required(login_url='usuario:login')
+@permission_required('proveedor.view_proveedor', raise_exception=True)
 def lista_proveedor(request):
     proveedor = Proveedor.objects.all()
     return render(request, 'proveedor/lista_proveedor.html', {'proveedor': proveedor})
 
+
+@login_required(login_url='usuario:login')
+@permission_required('proveedor.add_proveedor', raise_exception=True)
 def nuevo_proveedor(request):
     if request.method == 'POST':
         form = NuevoProveedorForm(request.POST)
@@ -21,6 +26,9 @@ def nuevo_proveedor(request):
         form = NuevoProveedorForm()
     return render(request, 'proveedor/proveedor_form.html', {'form': form})
 
+
+@login_required(login_url='usuario:login')
+@permission_required('proveedor.change_proveedor', raise_exception=True)
 def editar_proveedor(request, pk):
     materia = get_object_or_404(Proveedor, pk=pk)
     if request.method == 'POST':
@@ -33,6 +41,9 @@ def editar_proveedor(request, pk):
         form = ModificarProveedorForm(instance=materia)
     return render(request, 'proveedor/proveedor_form.html', {'form': form})
 
+
+@login_required(login_url='usuario:login')
+@permission_required('delete.view_proveedor', raise_exception=True)
 def eliminar_proveedor(request):
     if request.method == 'POST':
         if 'id_proveedor' in request.POST:
@@ -44,6 +55,9 @@ def eliminar_proveedor(request):
             messages.error(request, 'Debe indicar qué Proveedor se desea eliminar')
     return redirect(reverse('proveedor:lista_proveedor'))
 
+
+@login_required(login_url='usuario:login')
+@permission_required('proveedor.view_proveedor', raise_exception=True)
 def detalle_proveedor(request, pk):
     proveedor = get_object_or_404(Proveedor, id=pk)  # Obtener la venta específica
     mat_primas_suministradas = MateriaPrima.objects.filter(proveedor=proveedor)  # Obtener los items relacionados a esta venta
