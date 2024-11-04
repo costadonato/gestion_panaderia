@@ -16,11 +16,11 @@
             <div class="row">
                 <div class="col-md-3">
                     <label for="fec_inicio">Fecha inicio</label>
-                    <input type="date" name="fec_inicio" id="fec_inicio" class="form-control">
+                    <input type="date" name="fec_inicio" id="fec_inicio" class="form-control" onchange="validarFechas()">
                 </div>
                 <div class="col-md-3">
                     <label for="fec_fin">Fecha fin</label>
-                    <input type="date" name="fec_fin" id="fec_fin" class="form-control">
+                    <input type="date" name="fec_fin" id="fec_fin" class="form-control" onchange="validarFechas()">
                 </div>
                 <div class="col-md-3">
                     <label for="tipo_cliente">Tipo de Cliente</label>
@@ -78,4 +78,16 @@
 
     <a href="/informes/" class="btn btn-secondary mt-3">Volver a informes</a>
 </div>
+
+<script>
+    function validarFechas() {
+        const fechaInicio = document.getElementById('fec_inicio').value;
+        const fechaFin = document.getElementById('fec_fin').value;
+
+        if (fechaInicio && fechaFin && fechaFin < fechaInicio) {
+            alert("La fecha fin no puede ser anterior a la fecha de inicio.");
+            document.getElementById('fec_fin').value = '';  // Limpia la fecha fin si es incorrecta
+        }
+    }
+</script>
 {% endblock %}

@@ -2,10 +2,10 @@
 {% block titulo %}Empleados con Más Ventas{% endblock %}
 {% block contenido_principal %}
 <div class="container-fluid text-center rounded cab mt-5">
-        <header id="home">
-            <h1>INFORMES</h1>
-            <h2>Vendedores con más ventas</h2>
-        </header>
+    <header id="home">
+        <h1>INFORMES</h1>
+        <h2>Vendedores con más ventas</h2>
+    </header>
 </div>
 
 <div class="container-fluid mt-5 detalle" style="max-width: 800px;">
@@ -14,11 +14,11 @@
         {% csrf_token %}
         <div class="col-md-4 mt-3">
             <label for="fec_inicio">Fecha inicio</label>
-            <input type="date" name="fec_inicio" id="fec_inicio" class="form-control">
+            <input type="date" name="fec_inicio" id="fec_inicio" class="form-control" onchange="validarFechas()">
         </div>
         <div class="col-md-4 mt-3">
             <label for="fec_fin">Fecha fin</label>
-            <input type="date" name="fec_fin" id="fec_fin" class="form-control">
+            <input type="date" name="fec_fin" id="fec_fin" class="form-control" onchange="validarFechas()">
         </div>
         <div class="col-md-4 d-flex align-items-end">
             <button type="submit" class="btn btn-secondary">Filtrar</button>
@@ -45,5 +45,15 @@
     <a href="/informes/" class="btn btn-secondary mt-3">Volver a informes</a>
 </div>
 
+<script>
+    function validarFechas() {
+        const fechaInicio = document.getElementById('fec_inicio').value;
+        const fechaFin = document.getElementById('fec_fin').value;
 
-{% endblock %}
+        if (fechaInicio && fechaFin && fechaFin < fechaInicio) {
+            alert("La fecha fin no puede ser anterior a la fecha de inicio.");
+            document.getElementById('fec_fin').value = '';  // Limpia la fecha fin si es incorrecta
+        }
+    }
+</script>
+{%endblock%}

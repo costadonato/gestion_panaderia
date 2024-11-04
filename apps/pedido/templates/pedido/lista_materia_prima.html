@@ -26,31 +26,24 @@
                     <th>Nombre</th>
                     <th>Cantidad Disponible</th>
                     <th>Proveedor</th>
+                    <th>Faltante</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
                 {% for materia in materia_prima %}
-                    {% if materia.cant_disponible < materia.cantidadMinima %}
-                        <tr class="table-danger">
-                            <td>{{ materia.nombre }}</td>
-                            <td>{{ materia.cant_disponible }}</td>
-                            <td>{{ materia.proveedor }}</td>
-                            <td><a href="{% url 'materia_prima:editar_materia_prima' materia.id %}" class="btn btn-primary">EDITAR</a></td>
-                            <td>
-                                <form action="{% url 'materia_prima:eliminar_materia_prima' %}" method="POST">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="id_materia" value="{{ materia.id }}">
-                                    <input type="submit" value="ELIMINAR" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar esta Materia Prima?');">
-                                </form>
-                            </td>
-                        </tr>
-                    {% else %}
                         <tr>
                             <td>{{ materia.nombre }}</td>
                             <td>{{ materia.cant_disponible }}</td>
                             <td>{{ materia.proveedor }}</td>
+                            <td>
+                                {% if materia.cant_disponible < materia.cantidadMinima %}
+                                    SI
+                                {% else %}
+                                    NO
+                                {% endif %}
+                            </td>
                             <td><a href="{% url 'materia_prima:editar_materia_prima' materia.id %}" class="btn btn-primary">EDITAR</a></td>
                             <td>
                                 <form action="{% url 'materia_prima:eliminar_materia_prima' %}" method="POST">
@@ -60,7 +53,7 @@
                                 </form>
                             </td>
                         </tr>
-                    {% endif %}
+
                 {% empty %}
                 <tr>
                     <td colspan="5" class="text-center">No hay materias primas disponibles</td>

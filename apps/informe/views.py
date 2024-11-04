@@ -7,14 +7,14 @@ from apps.venta.models import Venta, Item
 from datetime import datetime
 
 @login_required(login_url='usuario:login')
-@user_passes_test(lambda u: u.groups.filter(name="Administrador").exists())
+@user_passes_test(lambda u: u.is_superuser or u.is_staff)
 def informe_ventas(request):
     ventas = Venta.objects.all()[:100]
     return render(request, 'informe/informe_ventas.html', {'ventas': ventas})
 
 
 @login_required(login_url='usuario:login')
-@user_passes_test(lambda u: u.groups.filter(name="Administrador").exists())
+@user_passes_test(lambda u: u.is_superuser or u.is_staff)
 def informe_ventas_filtradas(request):
     ventas = Venta.objects.all()
 
@@ -35,7 +35,7 @@ def informe_ventas_filtradas(request):
 
 
 @login_required(login_url='usuario:login')
-@user_passes_test(lambda u: u.groups.filter(name="Administrador").exists())
+@user_passes_test(lambda u: u.is_superuser or u.is_staff)
 def informe_productos_faltantes(request):
     productos = Producto.objects.all()
     productos_faltantes = productos.filter(cantidad__lt = F('cantidadMinima'))
@@ -43,7 +43,7 @@ def informe_productos_faltantes(request):
 
 
 @login_required(login_url='usuario:login')
-@user_passes_test(lambda u: u.groups.filter(name="Administrador").exists())
+@user_passes_test(lambda u: u.is_superuser or u.is_staff)
 def informe_matprima_faltante(request):
     materia_prima = MateriaPrima.objects.all()
     materia_prima_faltante = materia_prima.filter(cant_disponible__lt = F('cantidadMinima'))
@@ -51,7 +51,7 @@ def informe_matprima_faltante(request):
 
 
 @login_required(login_url='usuario:login')
-@user_passes_test(lambda u: u.groups.filter(name="Administrador").exists())
+@user_passes_test(lambda u: u.is_superuser or u.is_staff)
 def informe_productos_mas_vendidos(request):
     items = Item.objects.all()
 
@@ -88,7 +88,7 @@ def informe_productos_mas_vendidos(request):
 
 
 @login_required(login_url='usuario:login')
-@user_passes_test(lambda u: u.groups.filter(name="Administrador").exists())
+@user_passes_test(lambda u: u.is_superuser or u.is_staff)
 def informe_empleados_mas_ventas(request):
     ventas = Venta.objects.all()
 

@@ -21,51 +21,38 @@
                     <th>Stock</th>
                     <th>Unidad Medida</th>
                     <th>Tipo</th>
+                    <th>Faltante</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
                 {% for producto in productos %}
-                    {% if producto.cantidad < producto.cantidadMinima %}
-                        <tr class="table-danger">
-                            <td>{{ producto.nombre }}</td>
-                            <td>{{ producto.descripcion }}</td>
-                            <td>{{ producto.precio }}</td>
-                            <td>{{ producto.cantidad }}</td>
-                            <td>{{ producto.unidadMedida }}</td>
-                            <td>{{ producto.tipo }}</td>
-                            <td><a href="{% url 'producto:editar_producto' producto.id%}" class="btn btn-primary">
-                                        EDITAR
-                            </a></td>
-                            <td>
-                                <form action="{% url 'producto:eliminar_producto' %}" method="POST">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="id_producto" value="{{ producto.id }}">
-                                    <input type="submit" value="ELIMINAR" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el Producto?');">
-                                </form>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td>{{ producto.nombre }}</td>
-                            <td>{{ producto.descripcion }}</td>
-                            <td>{{ producto.precio }}</td>
-                            <td>{{ producto.cantidad }}</td>
-                            <td>{{ producto.unidadMedida }}</td>
-                            <td>{{ producto.tipo }}</td>
-                            <td><a href="{% url 'producto:editar_producto' producto.id%}" class="btn btn-primary">
-                                        EDITAR
-                            </a></td>
-                            <td>
-                                <form action="{% url 'producto:eliminar_producto' %}" method="POST">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="id_producto" value="{{ producto.id }}">
-                                    <input type="submit" value="ELIMINAR" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el Producto?');">
-                                </form>
-                            </td>
-                        </tr>
-                    {% endif %}
+                    <tr>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.descripcion }}</td>
+                        <td>{{ producto.precio }}</td>
+                        <td>{{ producto.cantidad }}</td>
+                        <td>{{ producto.unidadMedida }}</td>
+                        <td>{{ producto.tipo }}</td>
+                        <td>
+                            {% if producto.cantidad < producto.cantidadMinima %}
+                                SI
+                            {% else %}
+                                NO
+                            {% endif %}
+                        </td>
+                        <td><a href="{% url 'producto:editar_producto' producto.id%}" class="btn btn-primary">
+                                    EDITAR
+                        </a></td>
+                        <td>
+                            <form action="{% url 'producto:eliminar_producto' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="id_producto" value="{{ producto.id }}">
+                                <input type="submit" value="ELIMINAR" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el Producto?');">
+                            </form>
+                        </td>
+                    </tr>
                 {% empty %}
                     <tr>
                         <td colspan="4" class="text-center">No hay productos disponibles</td>
