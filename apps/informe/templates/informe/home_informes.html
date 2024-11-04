@@ -35,6 +35,16 @@
                 </div>
                 <div class="col">
                     <div class="card h-100 text-center">
+                        <img src="{% static 'img/productofaltante2.jpg' %}" class="card-img-top" alt="Listado de productos faltantes">
+                        <div class="card-body">
+                            <h5 class="card-title">Productos faltantes</h5>
+                            <p class="card-text">Listado sobre los productos en escasez, se necesita producir más!</p>
+                            <a href="{% url 'informe:prod_faltantes' %}" class="btn btn-success">ACCEDER</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 text-center">
                         <img src="{% static 'img/vendedorpremiado.png' %}" class="card-img-top" alt="Listado de vendedores con más ventas">
                         <div class="card-body">
                             <h5 class="card-title">Vendedores con más ventas</h5>
@@ -53,17 +63,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card h-100 text-center">
-                        <img src="{% static 'img/productofaltante2.jpg' %}" class="card-img-top" alt="Listado de productos faltantes">
-                        <div class="card-body">
-                            <h5 class="card-title">Productos faltantes</h5>
-                            <p class="card-text">Listado sobre los productos en escasez, se necesita producir más!</p>
-                            <a href="{% url 'informe:prod_faltantes' %}" class="btn btn-success">ACCEDER</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>

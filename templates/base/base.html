@@ -168,7 +168,7 @@
                                 </ul>
                             </li>
                         {% endif %}
-                        {% if perms.informe.view_informe %}
+                        {% if user.is_staff %}
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Informes
