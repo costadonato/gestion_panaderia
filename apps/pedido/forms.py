@@ -3,7 +3,7 @@
 from django import forms
 from django.forms import inlineformset_factory
 
-from apps.pedido.models import MateriaPrima, Pedido, ItemPedido
+from apps.pedido.models import MateriaPrima, Pedido, ItemPedido, RecepcionPedido
 
 
 class NuevaMateriaPrimaForm(forms.ModelForm):
@@ -50,7 +50,6 @@ class NuevoPedidoForm(forms.ModelForm):
                 field.widget.attrs['class'] = 'form-check-input'
 
 
-
 class NuevoItemPedidoForm(forms.ModelForm):
     class Meta:
         model = ItemPedido
@@ -73,3 +72,28 @@ ItemPedidoFormSet = inlineformset_factory(
     extra=1,  # Número de formularios vacíos
     can_delete=True  # Permite eliminar secciones
 )
+
+class Recepcion_pedido(forms.ModelForm):
+    CONFORME_CHOICES = [
+        (True, 'Sí'),
+        (False, 'No')
+    ]
+
+    conforme = forms.ChoiceField(
+        choices=CONFORME_CHOICES,
+        widget=forms.Select,
+        label="¿Está conforme con el pedido?"
+    )
+
+    class Meta:
+        model = RecepcionPedido
+        fields = [ 'conforme', 'observaciones']
+        widgets = {
+            'observaciones': forms.Textarea(attrs={'class': 'form-control input-sm', 'rows': 4}),
+        }
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'

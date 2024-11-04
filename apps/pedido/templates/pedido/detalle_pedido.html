@@ -9,11 +9,30 @@
 </div>
 
 <div class="container-fluid mt-5">
+    {% if not pedido.estado_recibido %}
+    <a href="{% url 'pedido:recepcion_pedido' pedido.id  %}" class="btn btn-primary">
+            Recepcionar pedido
+    </a>
+    {% endif %}
     <div class="container-fluid mt-4 detalle">
         <p><strong>Fecha de Registro:</strong> {{ pedido.fecha_emision|date:"d-m-Y "}}</p>
         <p><strong>Proveedor:</strong> {{ pedido.proveedor.nombre }}</p>
         <p><strong>Monto Total:</strong> {{ pedido.monto_total }}</p>
         <p><strong>Observaciones:</strong> {{ pedido.observaciones }}</p>
+        {% if pedido.estado_recibido %}
+        <p style="color: green"><strong>Estado: RECIBIDO</strong></p>
+        <h3><strong>DETALLES RECEPCIÓN</strong></h3>
+        <p ><strong>Observaciones: </strong>{{ pedido.pedido_recibido.observaciones }} </p>
+        <p><strong>Conformidad: </strong>
+            {% if pedido.pedido_recibido.conforme %}
+                Sí
+            {% else %}
+                No
+            {% endif %}
+        </p>
+        {% else %}
+            <p style="color: red"><strong>Estado: NO RECIBIDO</strong></p>
+        {% endif %}
     </div>
 
     <h2>Items</h2>
