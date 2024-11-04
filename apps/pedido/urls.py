@@ -1,5 +1,6 @@
 from django.urls import path
 from apps.pedido import views
+from apps.pedido.models import RecepcionPedido
 
 app_name = 'materia_prima'
 urlpatterns = [
@@ -10,4 +11,5 @@ urlpatterns = [
     path('nuevo-pedido/',views.nuevo_pedido, name='nuevo_pedido'),
     path('lista-pedidos/',views.lista_pedidos, name='lista_pedidos'),
     path('detalle-pedido/<int:pedido_id>/',views.detalle_pedido, name='detalle_pedido'),
+    path('recepcion_pedido/<int:pedido_id>', views.recepcion_pedido, name='recepcion_pedido' )
 ]

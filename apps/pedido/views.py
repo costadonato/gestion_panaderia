@@ -3,7 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib import messages
 
-from apps.pedido.forms import NuevaMateriaPrimaForm, ModificarMateriaPrimaForm, NuevoPedidoForm, ItemPedidoFormSet
+from apps.pedido.forms import NuevaMateriaPrimaForm, ModificarMateriaPrimaForm, NuevoPedidoForm, ItemPedidoFormSet, \
+    Recepcion_pedido
 from apps.pedido.models import MateriaPrima, Pedido, ItemPedido
 
 
@@ -101,3 +102,32 @@ def detalle_pedido(request, pedido_id):
     pedido = get_object_or_404(Pedido, id=pedido_id)  # Obtener la venta específica
     items = ItemPedido.objects.filter(pedido=pedido)  # Obtener los items relacionados a esta venta
     return render(request, 'pedido/detalle_pedido.html', {'pedido': pedido, 'items':items})
+
+def recepcion_pedido(request, pedido_id):
+    pedido = get_object_or_404(Pedido, id=pedido_id)
+    items = ItemPedido.objects.filter(pedido=pedido)
+
+    if request.method == 'POST':
+        recepcion_form = Recepcion_pedido(request.POST)
+        if recepcion_form.is_valid():
+            recepcion = recepcion_form.save(commit=False)
+            #Agrego a la recepcion el pedido y el empleado que hizo la recepcion
+            recepcion.pedido = pedido
+            recepcion.empleado = request.user.empleado
+            recepcion.save()
+
+            #Cambio estado del pedido a RECIBIDO
+            recepcion.pedido.estado_recibido = True
+            recepcion.pedido.save()
+
+            #actualizo materia prima
+            for item in items:
+                item.materia_prima.cant_disponible += item.cantidad
+                item.materia_prima.save()
+
+            messages.success(request, 'Se ha actualizado correctamente la recepcion')
+            return redirect(reverse('pedido:lista_pedidos'))
+    else:
+        recepcion_form = Recepcion_pedido()
+
+    return render(request, 'pedido/recepcion_pedido_form.html', {'pedido': pedido, 'form': recepcion_form})

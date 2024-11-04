@@ -20,6 +20,7 @@
                     <th>FECHA DE EMISION</th>
                     <th>MONTO TOTAL</th>
                     <th>PROVEEDOR</th>
+                    <th>RECIBIDO</th>
                     <th>ACCIONES</th>
                 </tr>
             </thead>
@@ -29,6 +30,11 @@
                         <td>{{ pedido.fecha_emision|date:"d-m-Y " }}</td>
                         <td>{{ pedido.monto_total }}</td>
                         <td>{{ pedido.proveedor.nombre }}</td>
+                        {% if pedido.estado_recibido %}
+                            <td>SI</td>
+                        {% else %}
+                            <td>NO</td>
+                        {% endif %}
                         <td>
                             <a href="{% url 'pedido:detalle_pedido' pedido.id %}" class="btn btn-info">Ver Detalle</a>
                         </td>
