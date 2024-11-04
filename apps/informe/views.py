@@ -1,21 +1,20 @@
-from xml.dom.minidom import Document
-
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.db.models import F, Count
-from django.shortcuts import render
 from apps.pedido.models import MateriaPrima
-from apps.producto.models import Producto
-from apps.venta.models import Venta
 from django.shortcuts import render
-from django.db.models import Sum
 from apps.producto.models import Producto
 from apps.venta.models import Venta, Item
 from datetime import datetime
 
-# Create your views here.
+@login_required(login_url='usuario:login')
+@user_passes_test(lambda u: u.groups.filter(name="Administrador").exists())
 def informe_ventas(request):
     ventas = Venta.objects.all()[:100]
     return render(request, 'informe/informe_ventas.html', {'ventas': ventas})
 
+
+@login_required(login_url='usuario:login')
+@user_passes_test(lambda u: u.groups.filter(name="Administrador").exists())
 def informe_ventas_filtradas(request):
     ventas = Venta.objects.all()
 
@@ -34,16 +33,25 @@ def informe_ventas_filtradas(request):
 
     return render(request, 'informe/informe_ventas.html', {'ventas': ventas})
 
+
+@login_required(login_url='usuario:login')
+@user_passes_test(lambda u: u.groups.filter(name="Administrador").exists())
 def informe_productos_faltantes(request):
     productos = Producto.objects.all()
     productos_faltantes = productos.filter(cantidad__lt = F('cantidadMinima'))
     return render(request, 'informe/informe_productos_faltantes.html', {'productos_faltantes': productos_faltantes})
 
+
+@login_required(login_url='usuario:login')
+@user_passes_test(lambda u: u.groups.filter(name="Administrador").exists())
 def informe_matprima_faltante(request):
     materia_prima = MateriaPrima.objects.all()
     materia_prima_faltante = materia_prima.filter(cant_disponible__lt = F('cantidadMinima'))
     return render(request, 'informe/informe_matprima_faltante.html', {'materia_prima_faltante': materia_prima_faltante})
 
+
+@login_required(login_url='usuario:login')
+@user_passes_test(lambda u: u.groups.filter(name="Administrador").exists())
 def informe_productos_mas_vendidos(request):
     items = Item.objects.all()
 
@@ -78,6 +86,9 @@ def informe_productos_mas_vendidos(request):
 
     return render(request, 'informe/informe_productos_mas_vendidos.html', {'productos_vendidos': productos_vendidos})
 
+
+@login_required(login_url='usuario:login')
+@user_passes_test(lambda u: u.groups.filter(name="Administrador").exists())
 def informe_empleados_mas_ventas(request):
     ventas = Venta.objects.all()
 

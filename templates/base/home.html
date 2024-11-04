@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 {% endif %}
-                {% if perms.pedido.view_pedido %}
+                {% if perms.pedido.view_materiaprima %}
                     <div class="col">
                         <div class="card h-100 text-center">
                             <img src="{% static 'img/materiaprima4.jpg' %}" class="card-img-top" alt="Materia prima">
@@ -96,7 +96,7 @@
                         </div>
                     </div>
                 {% endif %}
-                {% if perms.informe.view_informe %}
+                {% if user.is_superuser or user.is_staff %}
                     <div class="col">
                         <div class="card h-100 text-center">
                             <img src="{% static 'img/informe2.jpg' %}" class="card-img-top" alt="Informes">
@@ -107,8 +107,6 @@
                             </div>
                         </div>
                     </div>
-                {% endif %}
-                {% if perms.usuario.view_user %}
                     <div class="col">
                         <div class="card h-100 text-center">
                             <img src="{% static 'img/perfiles.png' %}" class="card-img-top" alt="Administración de perfiles">

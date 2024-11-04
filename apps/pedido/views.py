@@ -9,14 +9,14 @@ from apps.pedido.models import MateriaPrima, Pedido, ItemPedido
 
 
 @login_required(login_url='usuario:login')
-@permission_required('pedido.view_pedido', raise_exception=True)
+@permission_required('pedido.view_materiaprima', raise_exception=True)
 def lista_materia_prima(request):
     materia_prima = MateriaPrima.objects.all()
     return render(request, 'pedido/lista_materia_prima.html', {'materia_prima': materia_prima})
 
 
 @login_required(login_url='usuario:login')
-@permission_required('pedido.add_pedido', raise_exception=True)
+@permission_required('pedido.add_materiaprima', raise_exception=True)
 def nueva_materia_prima(request):
     if request.method == 'POST':
         form = NuevaMateriaPrimaForm(request.POST)
@@ -29,7 +29,7 @@ def nueva_materia_prima(request):
 
 
 @login_required(login_url='usuario:login')
-@permission_required('pedido.change_pedido', raise_exception=True)
+@permission_required('pedido.change_materiaprima', raise_exception=True)
 def editar_materia_prima(request, pk):
     materia = get_object_or_404(MateriaPrima, pk=pk)
     if request.method == 'POST':
@@ -44,7 +44,7 @@ def editar_materia_prima(request, pk):
 
 
 @login_required(login_url='usuario:login')
-@permission_required('pedido.delete_pedido', raise_exception=True)
+@permission_required('pedido.delete_materiaprima', raise_exception=True)
 def eliminar_materia_prima(request):
     if request.method == 'POST':
         materia_id = request.POST.get('id_materia')
