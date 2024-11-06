@@ -161,10 +161,9 @@
                                     Materia prima
                                 </a>
                                 <ul class="dropdown-menu" style="background-color: rgba(235, 152, 78);">
-                                    <li><a class="dropdown-item" href="#">Listado materia prima</a></li>
-                                    <li><a class="dropdown-item" href="#">Registrar pedido</a></li>
-                                    <li><a class="dropdown-item" href="#">Recepcionar pedido</a></li>
-                                    <li><a class="dropdown-item" href="#">Registrar proveedor</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'pedido:lista_materia_prima' %}">Listado materia prima</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'pedido:nuevo_pedido' %}">Registrar pedido</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'proveedor:nuevo_proveedor' %}">Registrar proveedor</a></li>
                                 </ul>
                             </li>
                         {% endif %}

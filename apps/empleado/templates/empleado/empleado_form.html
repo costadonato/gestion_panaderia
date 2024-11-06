@@ -29,4 +29,25 @@
         </form>
     </div>
 
+<script>
+    function validarEdad() {
+        const fechaNacimiento = document.getElementById('id_fecha_nacimiento').value;
+        if (fechaNacimiento) {
+            const fechaNacimientoDate = new Date(fechaNacimiento);
+            const hoy = new Date();
+            const edad = hoy.getFullYear() - fechaNacimientoDate.getFullYear();
+            const mes = hoy.getMonth() - fechaNacimientoDate.getMonth();
+            const dia = hoy.getDate() - fechaNacimientoDate.getDate();
+
+            if (edad < 18 || (edad === 18 && (mes < 0 || (mes === 0 && dia < 0)))) {
+                alert("El empleado debe tener al menos 18 años.");
+                document.getElementById('id_fecha_nacimiento').value = ''; // Limpiar campo si es inválido
+            }
+        }
+    }
+
+    // Añadir el evento onchange al campo de fecha de nacimiento
+    document.getElementById('id_fecha_nacimiento').setAttribute('onchange', 'validarEdad()');
+</script>
+
 {% endblock %}

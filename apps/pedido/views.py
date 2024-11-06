@@ -11,7 +11,7 @@ from apps.pedido.models import MateriaPrima, Pedido, ItemPedido
 @login_required(login_url='usuario:login')
 @permission_required('pedido.view_materiaprima', raise_exception=True)
 def lista_materia_prima(request):
-    materia_prima = MateriaPrima.objects.all()
+    materia_prima = MateriaPrima.objects.all()[:50]
     return render(request, 'pedido/lista_materia_prima.html', {'materia_prima': materia_prima})
 
 
@@ -58,7 +58,7 @@ def eliminar_materia_prima(request):
 @login_required(login_url='usuario:login')
 @permission_required('pedido.view_pedido', raise_exception=True)
 def lista_pedidos(request):
-    pedidos = Pedido.objects.all()
+    pedidos = Pedido.objects.all()[:50]
     return render(request, 'pedido/lista_pedidos.html', {'pedidos': pedidos})
 
 

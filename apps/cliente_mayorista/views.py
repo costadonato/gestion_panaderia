@@ -11,7 +11,7 @@ from apps.venta.models import Venta
 @login_required(login_url='usuario:login')
 @permission_required('cliente_mayorista.view_cliente_mayorista', raise_exception=True)
 def lista_clientesmayoristas(request):
-    clientes_mayoristas = ClienteMayorista.objects.all()
+    clientes_mayoristas = ClienteMayorista.objects.all()[:50]
     return render(request, 'cliente_mayorista/lista_clientesmayoristas.html', {'clientes_mayoristas': clientes_mayoristas})
 
 

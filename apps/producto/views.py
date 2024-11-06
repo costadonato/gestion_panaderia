@@ -10,7 +10,7 @@ from apps.producto.models import Producto
 @login_required(login_url='usuario:login')
 @permission_required('producto.view_producto', raise_exception=True)
 def lista_productos(request):
-    productos = Producto.objects.all()
+    productos = Producto.objects.all()[:50]
     return render(request, 'producto/lista_productos.html', {'productos': productos})
 
 
