@@ -9,7 +9,7 @@ from apps.venta.models import Venta, Item
 @login_required(login_url='usuario:login')
 @permission_required('venta.view_venta', raise_exception=True)
 def lista_ventas(request):
-    ventas = Venta.objects.all()  # Obtener todas las ventas
+    ventas = Venta.objects.all()[:50]  # Obtener todas las ventas
     return render(request, 'venta/lista_ventas.html', {'ventas': ventas})
 
 

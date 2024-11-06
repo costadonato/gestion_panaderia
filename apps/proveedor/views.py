@@ -10,7 +10,7 @@ from apps.proveedor.models import Proveedor
 @login_required(login_url='usuario:login')
 @permission_required('proveedor.view_proveedor', raise_exception=True)
 def lista_proveedor(request):
-    proveedor = Proveedor.objects.all()
+    proveedor = Proveedor.objects.all()[:50]
     return render(request, 'proveedor/lista_proveedor.html', {'proveedor': proveedor})
 
 
